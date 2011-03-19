@@ -1,0 +1,34 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), customers_path
+  = link_to t('edit'), edit_customer_path(@customer)
+
+%dl
+  %dt= CustomerTitle.human_attribute_name :title
+  %dd
+    - if @customer.customer_title
+      = @customer.customer_title.title
+  %dt= Customer.human_attribute_name :first_name
+  %dd= @customer.first_name
+  %dt= Customer.human_attribute_name :last_name
+  %dd= @customer.last_name
+  %dt= Customer.human_attribute_name :company
+  %dd= @customer.company
+  %dt= Customer.human_attribute_name :address_line1
+  %dd= @customer.address_line1
+  %dt= Customer.human_attribute_name :address_line2
+  %dd= @customer.address_line2
+  %dt= Customer.human_attribute_name :town
+  %dd= @customer.town
+  %dt= Customer.human_attribute_name :county
+  %dd= @customer.county
+  %dt= Customer.human_attribute_name :post_code
+  %dd= @customer.post_code
+  %dt= Customer.human_attribute_name :telephone
+  %dd= @customer.telephone
+  %dt= Customer.human_attribute_name :fax
+  %dd= @customer.fax
+  %dt= Customer.human_attribute_name :email
+  %dd= @customer.email
+  %dt= Customer.human_attribute_name :notes
+  %dd= @customer.notes

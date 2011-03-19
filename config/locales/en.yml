@@ -2,4 +2,19 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  actions: "Actions"
+  back: "Back"
+  show: "View"
+  edit: "Edit"
+  destroy: "Delete"
+  are_you_sure: "Are you sure?"
+  customers:
+    index:
+      title: "Customers"
+      new_customer: "New Customer"
+    new:
+      title: "Create A New Customer"
+    show:
+      title: "Customer Details"
+    edit:
+      title: "Edit Customer"

@@ -15,9 +15,12 @@ platforms :jruby do
 end
 
 gem 'haml'
+gem 'foreigner'
+gem 'formtastic'
 
 group :test do
   gem 'shoulda'
+  gem 'factory_girl_rails'
 end
 
 # Use unicorn as the web server
