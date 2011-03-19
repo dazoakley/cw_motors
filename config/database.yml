@@ -37,7 +37,7 @@ development:
   database: cw_motors_development
   pool: 5
   username: cw_motors
-  password:
+  password: cw_motors
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -63,7 +63,7 @@ test:
   database: cw_motors_test
   pool: 5
   username: cw_motors
-  password:
+  password: cw_motors
 
 production:
   adapter: postgresql
@@ -71,4 +71,4 @@ production:
   database: cw_motors_production
   pool: 5
   username: cw_motors
-  password:
+  password: cw_motors
