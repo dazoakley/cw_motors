@@ -14,6 +14,7 @@ platforms :jruby do
   gem 'jdbc-postgres', :require => false
 end
 
+gem 'haml'
 
 # Use unicorn as the web server
 # gem 'unicorn'
