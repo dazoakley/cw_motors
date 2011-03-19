@@ -16,6 +16,10 @@ end
 
 gem 'haml'
 
+group :test do
+  gem 'shoulda'
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

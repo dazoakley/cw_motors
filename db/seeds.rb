@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+titles = CustomerTitle.create([
+  { :title => 'Mr' },
+  { :title => 'Mrs' },
+  { :title => 'Miss' },
+  { :title => 'Ms' },
+  { :title => 'Dr' }
+])
