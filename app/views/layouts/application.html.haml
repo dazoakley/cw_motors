@@ -1,0 +1,28 @@
+!!!
+%html
+%head
+  %title= "CW Motors"
+  = stylesheet_link_tag 'reset', '960', 'formtastic', 'screen'
+  = javascript_include_tag :defaults
+  = csrf_meta_tag
+
+%body
+  
+  .container_12
+    .grid_12
+      #header
+        %h1= "CW Motors"
+  
+  .clear
+  
+  .container_12
+    .grid_12
+      #navigation
+        %p= "woot"
+  
+  .clear
+  
+  .container_12
+    .grid_12
+      #content
+        = yield

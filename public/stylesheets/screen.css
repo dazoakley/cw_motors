@@ -1,0 +1,82 @@
+/* @override http://localhost:3000/stylesheets/screen.css */
+
+body {
+	font: 14px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #212121;
+}
+
+/* Headings */
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-weight: bold;
+	margin-bottom: 10px;
+	line-height: 1em;
+}
+
+h1 { font-size: 38px; }
+h2 { font-size: 34px; }
+h3 { font-size: 30px; }
+h4 { font-size: 26px; }
+h5 { font-size: 22px; }
+h6 { font-size: 18px; }
+
+/* Layout */
+
+.clear {
+	clear: both;
+}
+
+#header {
+	margin-top: 10px;
+}
+
+#header h1 {
+	margin-bottom: 0;
+}
+
+#navigation {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-top: 1px solid #d5d5d5;
+	border-bottom: 1px solid #d5d5d5;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+/* Type */
+
+p, table, ul, ol {
+	margin-bottom: 10px;
+}
+
+/* Tables */
+
+table {
+	width: 100%;
+	text-align: center;
+}
+
+table thead {
+	border-bottom: 3px solid #d5d5d5;
+}
+
+table thead th {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-weight: bold;
+	text-transform: capitalize;
+	padding: 5px;
+}
+
+table td {
+	padding: 5px;
+}
+
+table tbody tr {
+	border-bottom: 1px solid #d5d5d5;
+}
+
+table tbody tr.even {
+	color: #797979;
+}
+
