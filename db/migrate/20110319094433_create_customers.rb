@@ -18,11 +18,13 @@ class CreateCustomers < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :customers, [:first_name, :last_name, :company]
+    add_index :customers, [:first_name, :last_name, :company], :unique => true
     add_foreign_key(:customers, :customer_titles)
   end
 
   def self.down
+    remove_foreign_key(:customers, :customer_titles)
+    remove_index :customers, :column => [:first_name, :last_name, :company]
     drop_table :customers
   end
 end
