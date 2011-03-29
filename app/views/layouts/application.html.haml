@@ -18,7 +18,9 @@
   .container_12
     .grid_12
       #navigation
-        %p= "woot"
+        %ul
+          %li= link_to 'Home', root_path
+          %li= link_to 'Customers', customers_path
   
   .clear
   

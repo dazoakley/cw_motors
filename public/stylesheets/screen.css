@@ -80,3 +80,16 @@ table tbody tr.even {
 	color: #797979;
 }
 
+/* Buttons */
+
+.button {
+	background-color: #fcfcf7;
+	border: 1px solid #eeeee0;
+	-webkit-border-radius: 3px;
+	padding: 5px;
+}
+
+.new_user {
+	
+}
+
