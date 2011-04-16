@@ -4,8 +4,11 @@ class CreateInvoices < ActiveRecord::Migration
       t.references :invoice_status
       t.references :customer
       t.date :date, :null => false
-      t.decimal :mot, :precision => 8, :scale => 2
-      t.decimal :vat_rate, :null => false, :precision => 5, :scale => 2
+      t.string :make_model
+      t.string :registration
+      t.integer :mileage
+      t.decimal :mot, :default => 0.00, :precision => 8, :scale => 2
+      t.decimal :vat_rate, :default => 20.00, :null => false, :precision => 5, :scale => 2
       t.decimal :vat, :null => false, :precision => 8, :scale => 2
       t.decimal :subtotal, :null => false, :precision => 8, :scale => 2
       t.decimal :total, :null => false, :precision => 8, :scale => 2

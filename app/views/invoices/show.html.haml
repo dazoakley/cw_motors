@@ -1,0 +1,16 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), invoices_path
+  = link_to t('edit'), edit_invoice_path(@invoice)
+
+%dl
+  %dt= Invoice.human_attribute_name :date
+  %dd= @invoice.date
+  %dt= Invoice.human_attribute_name :mot
+  %dd= @invoice.mot
+  %dt= Invoice.human_attribute_name :vat_rate
+  %dd= @invoice.vat_rate
+  %dt= Invoice.human_attribute_name :vat
+  %dd= @invoice.vat
+  %dt= Invoice.human_attribute_name :total
+  %dd= @invoice.total

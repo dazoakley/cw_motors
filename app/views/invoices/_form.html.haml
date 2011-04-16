@@ -1,0 +1,36 @@
+= semantic_form_for(@invoice) do |f|
+
+  = f.inputs do
+    = f.input :customer, :label_method => :short_code, :required => true
+    = f.input :date, :hint => 'This will automatically be set to today if left blank'
+    = f.input :make_model, :label => 'Make/Model'
+    = f.input :registration, :label => 'Reg. No.'
+    = f.input :mileage, :hint => "Don't put any commas in here"
+    = f.input :vat_rate, :label => 'VAT Rate'
+    = f.input :mot
+  
+  %table{ :width => '100%' }
+    %tr
+      %td{ :width => '50%' }
+      
+        #labour
+          %h6= 'Labour'
+          %table{ :width => '100%' }
+            %thead
+              %tr
+                %th{ :width => '75%' }
+                  Details
+                %th{ :width => '25%' }
+                  Price (&pound;)
+            %tbody
+              = f.semantic_fields_for :invoice_labours do |l|
+                %tr
+                  %td= l.text_field :details, :size => 55
+                  %td= l.text_field :price, :size => 10
+                  
+      %td{ :width => '50%' }
+      
+        #parts
+          %h6= 'Parts'
+  
+  = f.buttons

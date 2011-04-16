@@ -18,3 +18,13 @@ en:
       title: "Customer Details"
     edit:
       title: "Edit Customer"
+  invoices:
+    index:
+      title: "Invoices"
+      new_invoice: "New Invoice"
+    new:
+      title: "Create A New Invoice"
+    show:
+      title: "Invoice Details"
+    edit:
+      title: "Edit Invoice"

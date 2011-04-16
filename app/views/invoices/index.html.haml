@@ -1,0 +1,28 @@
+%h1= t('.title')
+%p= link_to t('.new_invoice'), new_invoice_path
+
+%table
+  %thead
+    %tr
+      %th= 'Customer'
+      %th= 'Date'
+      %th= 'Make/Model'
+      %th= 'Reg. No.'
+      %th= 'MOT'
+      %th= 'VAT'
+      %th= 'Total'
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for invoice in @invoices
+      %tr{ :class => cycle(:odd, :even) }
+        %td= invoice.customer.short_code
+        %td= invoice.date
+        %td= invoice.make_model
+        %td= invoice.registration
+        %td= invoice.mot
+        %td= invoice.vat
+        %td= invoice.total
+        %td.action= link_to t('show'), invoice
+        %td.action= link_to t('edit'), edit_invoice_path(invoice)
+        %td.action= link_to t('destroy'), invoice, :confirm => t('are_you_sure'), :method => :delete
