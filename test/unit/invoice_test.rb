@@ -8,6 +8,7 @@ class InvoiceTest < ActiveSupport::TestCase
   should belong_to(:customer)
   
   should have_many(:invoice_labours)
+  should have_many(:invoice_parts)
   
   should validate_presence_of(:date)
   should validate_presence_of(:vat_rate)

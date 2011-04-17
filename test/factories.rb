@@ -12,7 +12,6 @@ end
 
 Factory.define :invoice do |i|
   i.association :customer, :factory => :customer
-  i.invoice_status_id { InvoiceStatus.all.sort_by{ rand }[0].id }
   i.make_model        'Ford Cougar'
   i.registration      'KU45 4GB'
   i.mileage           65700
@@ -22,11 +21,17 @@ Factory.define :invoice do |i|
   i.subtotal          200.00
   i.vat               { |p| ( p.subtotal / 100 ) * p.vat_rate }
   i.total             { |p| p.mot + p.subtotal + p.vat }
-  i.paid              { [true,false]..sort_by{ rand }[0] }
+  i.paid              true
 end
 
 Factory.define :invoice_labour do |l|
-  l.association :invoice
+  l.association :invoice, :factory => :invoice
   l.details     'Some random bit of work'
   l.price       20.75
+end
+
+Factory.define :invoice_part do |p|
+  p.association :invoice, :factory => :invoice
+  p.details     'Some random bit of kit'
+  p.price       42.25
 end

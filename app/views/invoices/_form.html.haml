@@ -33,5 +33,17 @@
       
         #parts
           %h6= 'Parts'
+          %table{ :width => '100%' }
+            %thead
+              %tr
+                %th{ :width => '75%' }
+                  Details
+                %th{ :width => '25%' }
+                  Price (&pound;)
+            %tbody
+              = f.semantic_fields_for :invoice_parts do |l|
+                %tr
+                  %td= l.text_field :details, :size => 55
+                  %td= l.text_field :price, :size => 10
   
   = f.buttons

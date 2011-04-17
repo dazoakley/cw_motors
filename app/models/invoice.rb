@@ -2,8 +2,10 @@ class Invoice < ActiveRecord::Base
   belongs_to :customer
   
   has_many :invoice_labours, :dependent => :destroy
+  has_many :invoice_parts, :dependent => :destroy
   
   accepts_nested_attributes_for :invoice_labours, :allow_destroy => true, :reject_if => Proc.new { |il| il[:price].blank? }
+  accepts_nested_attributes_for :invoice_parts,   :allow_destroy => true, :reject_if => Proc.new { |ip| ip[:price].blank? }
   
   validates_presence_of :customer_id
   validates_presence_of :date
@@ -40,9 +42,8 @@ class Invoice < ActiveRecord::Base
     
     def calculate_subtotal
       subtotal = 0.00
-      self.invoice_labours.each do |il|
-        subtotal += il.price
-      end
+      self.invoice_labours.each { |il| subtotal += il.price }
+      self.invoice_parts.each   { |ip| subtotal += ip.price }
       self.subtotal = subtotal
     end
     

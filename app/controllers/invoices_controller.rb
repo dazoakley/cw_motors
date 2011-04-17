@@ -26,6 +26,7 @@ class InvoicesController < ApplicationController
   def new
     @invoice = Invoice.new
     5.times { @invoice.invoice_labours.build }
+    5.times { @invoice.invoice_parts.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,11 +49,20 @@ class InvoicesController < ApplicationController
         format.html { redirect_to(@invoice, :notice => 'Invoice was successfully created.') }
         format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
       else
+        no_of_pre_made_stuff = 5
+        
         if @invoice.invoice_labours.empty?
-          5.times { @invoice.invoice_labours.build }
+          no_of_pre_made_stuff.times { @invoice.invoice_labours.build }
         else
-          no_times = 5 - @invoice.invoice_labours.size
+          no_times = no_of_pre_made_stuff - @invoice.invoice_labours.size
           no_times.times { @invoice.invoice_labours.build }
+        end
+        
+        if @invoice.invoice_parts.empty?
+          no_of_pre_made_stuff.times { @invoice.invoice_parts.build }
+        else
+          no_times = no_of_pre_made_stuff - @invoice.invoice_parts.size
+          no_times.times { @invoice.invoice_parts.build }
         end
         
         format.html { render :action => "new" }
