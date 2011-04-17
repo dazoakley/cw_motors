@@ -13,8 +13,3 @@ titles = CustomerTitle.create([
   { :title => 'Ms' },
   { :title => 'Dr' }
 ])
-
-invoice_statuses = InvoiceStatus.create([
-  { :status => 'Paid' },
-  { :status => 'Unpaid' }
-])

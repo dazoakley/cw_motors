@@ -1,5 +1,4 @@
 class Invoice < ActiveRecord::Base
-  belongs_to :invoice_status
   belongs_to :customer
   
   has_many :invoice_labours, :dependent => :destroy
@@ -17,12 +16,23 @@ class Invoice < ActiveRecord::Base
   validates_numericality_of :subtotal
   validates_numericality_of :total
   
-  before_validation :set_date_to_today, :if => Proc.new { |a| a.date.blank? }
+  before_validation :set_date_to_today, :if => Proc.new { |i| i.date.blank? }
   before_validation :calculate_subtotal
   before_validation :calculate_vat
   before_validation :calculate_total
   
+  before_save :stamp_date_paid, :if => Proc.new { |i| i.paid == true }
+  before_save :remove_date_paid, :if => Proc.new { |i| i.paid == false }
+  
   private
+    
+    def stamp_date_paid
+      self.date_paid = Date.today() if date_paid.blank?
+    end
+    
+    def remove_date_paid
+      self.date_paid = nil unless date_paid.blank?
+    end
     
     def set_date_to_today
       self.date = Date.today()

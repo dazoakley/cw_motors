@@ -12,17 +12,17 @@ class CreateInvoices < ActiveRecord::Migration
       t.decimal :vat, :null => false, :precision => 8, :scale => 2
       t.decimal :subtotal, :null => false, :precision => 8, :scale => 2
       t.decimal :total, :null => false, :precision => 8, :scale => 2
+      t.boolean :paid, :default => false
+      t.date :date_paid
 
       t.timestamps
     end
     
-    add_foreign_key(:invoices, :invoice_statuses)
     add_foreign_key(:invoices, :customers)
   end
 
   def self.down
     remove_foreign_key(:invoices, :customers)
-    remove_foreign_key(:invoices, :invoice_statuses)
     drop_table :invoices
   end
 end

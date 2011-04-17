@@ -22,6 +22,7 @@ Factory.define :invoice do |i|
   i.subtotal          200.00
   i.vat               { |p| ( p.subtotal / 100 ) * p.vat_rate }
   i.total             { |p| p.mot + p.subtotal + p.vat }
+  i.paid              { [true,false]..sort_by{ rand }[0] }
 end
 
 Factory.define :invoice_labour do |l|

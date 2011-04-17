@@ -46,26 +46,20 @@ ActiveRecord::Schema.define(:version => 20110329212112) do
     t.datetime "updated_at"
   end
 
-  create_table "invoice_statuses", :force => true do |t|
-    t.string   "status",     :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "invoice_statuses", ["status"], :name => "index_invoice_statuses_on_status", :unique => true
-
   create_table "invoices", :force => true do |t|
     t.integer  "invoice_status_id", :limit => 10
     t.integer  "customer_id",       :limit => 10
-    t.date     "date",                                                                            :null => false
+    t.date     "date",                                                                             :null => false
     t.string   "make_model"
     t.string   "registration"
     t.integer  "mileage",           :limit => 10
     t.decimal  "mot",                             :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "vat_rate",                        :precision => 5, :scale => 2, :default => 20.0, :null => false
-    t.decimal  "vat",                             :precision => 8, :scale => 2,                   :null => false
-    t.decimal  "subtotal",                        :precision => 8, :scale => 2,                   :null => false
-    t.decimal  "total",                           :precision => 8, :scale => 2,                   :null => false
+    t.decimal  "vat_rate",                        :precision => 5, :scale => 2, :default => 20.0,  :null => false
+    t.decimal  "vat",                             :precision => 8, :scale => 2,                    :null => false
+    t.decimal  "subtotal",                        :precision => 8, :scale => 2,                    :null => false
+    t.decimal  "total",                           :precision => 8, :scale => 2,                    :null => false
+    t.boolean  "paid",                                                          :default => false
+    t.date     "date_paid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -75,6 +69,5 @@ ActiveRecord::Schema.define(:version => 20110329212112) do
   add_foreign_key "invoice_labours", "invoices", :name => "invoice_labours_invoice_id_fk"
 
   add_foreign_key "invoices", "customers", :name => "invoices_customer_id_fk"
-  add_foreign_key "invoices", "invoice_statuses", :name => "invoices_invoice_status_id_fk"
 
 end

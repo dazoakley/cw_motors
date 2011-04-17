@@ -6,7 +6,6 @@ class InvoiceTest < ActiveSupport::TestCase
   end
   
   should belong_to(:customer)
-  should belong_to(:invoice_status)
   
   should have_many(:invoice_labours)
   
