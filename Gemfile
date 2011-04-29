@@ -17,6 +17,7 @@ end
 gem 'haml'
 gem 'foreigner'
 gem 'formtastic'
+gem 'kaminari'
 
 group :test do
   gem 'shoulda'

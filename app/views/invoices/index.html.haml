@@ -1,9 +1,12 @@
 %h1= t('.title')
 %p.hide_on_print= link_to t('.new_invoice'), new_invoice_path
 
+.pagination= paginate @invoices
+
 %table
   %thead
     %tr
+      %th= 'ID'
       %th= 'Customer'
       %th= 'Date'
       %th= 'Make/Model'
@@ -16,6 +19,7 @@
   %tbody
     - for invoice in @invoices
       %tr{ :class => cycle(:odd, :even) }
+        %td= invoice.id
         %td= invoice.customer.short_code
         %td= invoice.date
         %td= invoice.make_model
@@ -26,3 +30,5 @@
         %td.action.hide_on_print= link_to t('show'), invoice
         %td.action.hide_on_print= link_to t('edit'), edit_invoice_path(invoice)
         %td.action.hide_on_print= link_to t('destroy'), invoice, :confirm => t('are_you_sure'), :method => :delete
+
+.pagination= paginate @invoices

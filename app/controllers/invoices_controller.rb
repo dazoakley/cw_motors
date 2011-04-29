@@ -2,7 +2,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.xml
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.order("id ASC").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

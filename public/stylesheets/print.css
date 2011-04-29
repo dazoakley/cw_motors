@@ -2,7 +2,7 @@
 
 /* Hidden Stuff */
 
-#navigation, .hide_on_print {
+#navigation, .paginaton, .button, .hide_on_print {
 	display: none;
 }
 
