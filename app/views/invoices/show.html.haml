@@ -1,16 +1,162 @@
-%h1= t '.title'
-%p
+- customer = @invoice.customer
+
+%div.hide_on_print.float_right
+  %a.button.print{ :href => "javascript:window.print()" } Print
+
+%div.hide_on_print
   = link_to t('back'), invoices_path
   = link_to t('edit'), edit_invoice_path(@invoice)
 
-%dl
-  %dt= Invoice.human_attribute_name :date
-  %dd= @invoice.date
-  %dt= Invoice.human_attribute_name :mot
-  %dd= @invoice.mot
-  %dt= Invoice.human_attribute_name :vat_rate
-  %dd= @invoice.vat_rate
-  %dt= Invoice.human_attribute_name :vat
-  %dd= @invoice.vat
-  %dt= Invoice.human_attribute_name :total
-  %dd= @invoice.total
+%table.noborder
+  %tr
+    %td{ :width => '60%' }
+      = image_tag('cw_logo.png', :width => 300)
+      <br/>
+      Motor Servicing, Diesel Specialists,<br/>
+      French Car Specialists & All Vehicle Repairs
+    %td{ :align => 'left', :style => 'vertical-align:middle;' }
+      CW Motor Services Ltd.<br/>
+      33 Bury Mead Road<br/>
+      Hitchin<br/>
+      Hertfordshire<br/>
+      SG5 1RT<br/>
+      <br/>
+      
+      %table.noborder.nopadding
+        %tr
+          %td.left Tel:
+          %td.left (01462) 450374
+        %tr
+          %td.left Mobile:
+          %td.left
+            07956240394 (Colin Whiteley)<br/>
+            07879411141 (Paul Oakley)
+
+%hr.pad
+
+%table.noborder.padding
+  %tr
+    %th.right.strong{ :width => '20%' } Customer Name
+    %td.left{ :width => '30%' }= "#{customer.first_name} #{customer.last_name}"
+    %th.right.strong{ :width => '20%' } Date
+    %td.left{ :width => '30%' }= @invoice.date
+  %tr
+    %th.right.strong Customer Company
+    %td.left= customer.company
+    %th.right.strong Make / Model
+    %td.left= @invoice.make_model
+  %tr
+    %th.right.strong Customer Telephone
+    %td.left= customer.telephone
+    %th.right.strong Reg No.
+    %td.left= @invoice.registration
+  %tr
+    %th.right.strong{ :rowspan => 3 } Customer Address
+    %td.left{ :rowspan => 2 }
+      - address = [ customer.address_line1, customer.address_line2, customer.town, customer.county, customer.post_code ]
+      - address.delete_if { |a| a.blank? }
+      =raw "#{address.join('<br/>')}"
+    %th.right.strong Mileage
+    %td.left= @invoice.mileage
+  %tr
+    %th.right.strong Invoice Number
+    %td.left= @invoice.id
+
+%hr.pad
+
+%table.noborder
+  %tr
+    %td{ :width => '50%' }
+      
+      %table.border.padding
+        %thead
+          %tr
+            %th Labour
+            %th &pound;
+        %tbody
+          - @invoice.invoice_labours.each do |il|
+            %tr
+              %td.left= il.details
+              %td= il.price
+      
+    %td
+      
+      %table.border.padding
+        %thead
+          %tr
+            %th Parts
+            %th &pound;
+        %tbody
+          - @invoice.invoice_parts.each do |il|
+            %tr
+              %td.left= il.details
+              %td= il.price
+
+%hr.pad
+
+%table.noborder
+  %tr
+    %td{ :width => '50%' }
+      
+      %table.border.padding
+        %thead
+          %tr
+            %td
+            %th &pound;
+        %tbody
+          %tr
+            %th.right.strong Total Labour
+            %td= @invoice.total_labour
+          %tr
+            %td.left.smallprint{ :colspan => 2 }
+              I hereby authorise the above described work and the incorporation of necessary parts or other material incidental thereto.<br/><br/>
+              I agree to pay for the work, parts and materials necessary at your customary rates and charges on delivery, unless arrangements satisfactory to you for credit are made in advance.<br/><br/>
+              It is understood that you shall not be responsible for loss or damage to vehicles or contents in case of fire, theft, accident or other causes beyond your control.
+      
+    %td
+      
+      %table.border.padding
+        %thead
+          %tr
+            %td
+            %th &pound;
+        %tbody
+          %tr
+            %th.right.strong Total Parts
+            %td= @invoice.total_parts
+          %tr
+            %th.right.strong Environmental
+            %td
+          %tr
+            %th.right.strong Subtotal
+            %td= @invoice.subtotal
+          %tr
+            %th.right.strong=raw "VAT (#{@invoice.vat_rate}&#37;)"
+            %td= @invoice.vat
+          %tr
+            %th.right.strong Total
+            %td= @invoice.total
+          %tr
+            %th.right.strong MOT
+            %td= @invoice.mot
+          %tr
+            %th.right.strong Total Due
+            %td= @invoice.total + @invoice.mot
+
+%table.noborder{ :style => 'margin-top:25px' }
+  %tr
+    %td{ :width => '5%' }
+    %th{ :width => '15%' } Customers Signature
+    %td{ :width => '35%', :style => 'border-bottom:1px dashed #d5d5d5' }
+    %td{ :width => '5%' }
+    %th{ :width => '15%' } Date
+    %td{ :width => '15%', :style => 'border-bottom:1px dashed #d5d5d5' }
+    %td{ :width => '5%' }
+
+%hr.pad
+
+%table.noborder
+  %tr
+    %td VAT Registration No. 796 8109 74
+  %tr
+    %td{ :style => 'font-weight:bold;color:red' } Please note that ALL invoices must be paid within 30 days

@@ -1,8 +1,15 @@
-/* @override http://localhost:3000/stylesheets/screen.css */
+/* @override http://localhost:3000/stylesheets/print.css */
+
+/* Hidden Stuff */
+
+#navigation, .hide_on_print {
+	display: none;
+}
+
+/* Body */
 
 body {
-	font: 14px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-	color: #212121;
+	font: 10px/14px Arial, Helvetica, Geneva, sans-serif;
 }
 
 /* Headings */
@@ -10,29 +17,20 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-weight: bold;
-	margin-bottom: 10px;
-	line-height: 1em;
+	margin-bottom: 5px;
 }
 
-h1 { font-size: 38px; }
-h2 { font-size: 34px; }
-h3 { font-size: 30px; }
-h4 { font-size: 26px; }
-h5 { font-size: 22px; }
-h6 { font-size: 18px; }
+h1 { font-size: 34px; }
+h2 { font-size: 30px; }
+h3 { font-size: 26px; }
+h4 { font-size: 22px; }
+h5 { font-size: 18px; }
+h6 { font-size: 14px; }
 
 /* Layout */
 
 .clear {
 	clear: both;
-}
-
-.float_left {
-	float: left;
-}
-
-.float_right {
-	float: right;
 }
 
 #header {
@@ -41,15 +39,6 @@ h6 { font-size: 18px; }
 
 #header h1 {
 	margin-bottom: 0;
-}
-
-#navigation {
-	margin-top: 10px;
-	margin-bottom: 10px;
-	border-top: 1px solid #d5d5d5;
-	border-bottom: 1px solid #d5d5d5;
-	padding-top: 5px;
-	padding-bottom: 5px;
 }
 
 hr {
@@ -133,17 +122,3 @@ th.left, td.left {
 th.right, td.right {
 	text-align: right;
 }
-
-/* Buttons */
-
-.button {
-	background-color: #fcfcf7;
-	border: 1px solid #eeeee0;
-	-webkit-border-radius: 3px;
-	padding: 5px;
-}
-
-.new_user {
-	
-}
-

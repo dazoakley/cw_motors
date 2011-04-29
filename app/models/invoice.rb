@@ -26,6 +26,18 @@ class Invoice < ActiveRecord::Base
   before_save :stamp_date_paid, :if => Proc.new { |i| i.paid == true }
   before_save :remove_date_paid, :if => Proc.new { |i| i.paid == false }
   
+  def total_labour
+    total_labour = 0.00
+    self.invoice_labours.each { |il| total_labour += il.price }
+    return total_labour
+  end
+  
+  def total_parts
+    total_parts = 0.00
+    self.invoice_parts.each { |ip| total_parts += ip.price }
+    return total_parts
+  end
+  
   private
     
     def stamp_date_paid
