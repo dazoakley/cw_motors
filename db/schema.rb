@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20110417153137) do
     t.string   "registration"
     t.integer  "mileage",           :limit => 10
     t.decimal  "mot",                             :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "environmental",                   :precision => 8, :scale => 2, :default => 0.0
     t.decimal  "vat_rate",                        :precision => 5, :scale => 2, :default => 20.0,  :null => false
     t.decimal  "vat",                             :precision => 8, :scale => 2,                    :null => false
     t.decimal  "subtotal",                        :precision => 8, :scale => 2,                    :null => false

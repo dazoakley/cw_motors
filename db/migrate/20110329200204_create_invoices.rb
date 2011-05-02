@@ -8,6 +8,7 @@ class CreateInvoices < ActiveRecord::Migration
       t.string :registration
       t.integer :mileage
       t.decimal :mot, :default => 0.00, :precision => 8, :scale => 2
+      t.decimal :environmental, :default => 0.00, :precision => 8, :scale => 2
       t.decimal :vat_rate, :default => 20.00, :null => false, :precision => 5, :scale => 2
       t.decimal :vat, :null => false, :precision => 8, :scale => 2
       t.decimal :subtotal, :null => false, :precision => 8, :scale => 2

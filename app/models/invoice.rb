@@ -13,11 +13,13 @@ class Invoice < ActiveRecord::Base
   
   validates_numericality_of :mileage, :only_integer => true, :allow_blank => true
   validates_numericality_of :mot
+  validates_numericality_of :environmental
   validates_numericality_of :vat_rate
   validates_numericality_of :vat
   validates_numericality_of :subtotal
   validates_numericality_of :total
   
+  before_validation :set_vat_rate, :if => Proc.new { |i| i.vat_rate.blank? }
   before_validation :set_date_to_today, :if => Proc.new { |i| i.date.blank? }
   before_validation :calculate_subtotal
   before_validation :calculate_vat
@@ -48,12 +50,17 @@ class Invoice < ActiveRecord::Base
       self.date_paid = nil unless date_paid.blank?
     end
     
+    def set_vat_rate
+      # default VAT rate is 20.00
+      self.vat_rate = 20.00
+    end
+    
     def set_date_to_today
       self.date = Date.today()
     end
     
     def calculate_subtotal
-      subtotal = 0.00
+      subtotal = 0.00 + self.environmental
       self.invoice_labours.each { |il| subtotal += il.price }
       self.invoice_parts.each   { |ip| subtotal += ip.price }
       self.subtotal = subtotal
