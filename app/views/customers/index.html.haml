@@ -6,41 +6,28 @@
 %table
   %thead
     %tr
-      %th= CustomerTitle.human_attribute_name :title
       %th= Customer.human_attribute_name :first_name
       %th= Customer.human_attribute_name :last_name
       %th= Customer.human_attribute_name :company
       %th= Customer.human_attribute_name :address_line1
-      %th= Customer.human_attribute_name :address_line2
       %th= Customer.human_attribute_name :town
-      %th= Customer.human_attribute_name :county
-      %th= Customer.human_attribute_name :post_code
       %th= Customer.human_attribute_name :telephone
-      %th= Customer.human_attribute_name :fax
       %th= Customer.human_attribute_name :email
-      %th= Customer.human_attribute_name :notes
-      %th.hide_on_print{:colspan => 3}= t 'actions'
+      %th.hide_on_print= t 'actions'
   
   %tbody
     - for customer in @customers
       %tr{ :class => cycle(:odd, :even) }
-        %td 
-          - unless customer.customer_title.nil?
-            = customer.customer_title.title
         %td= customer.first_name
         %td= customer.last_name
         %td= customer.company
         %td= customer.address_line1
-        %td= customer.address_line2
         %td= customer.town
-        %td= customer.county
-        %td= customer.post_code
         %td= customer.telephone
-        %td= customer.fax
         %td= customer.email
-        %td= customer.notes
-        %td.action.hide_on_print= link_to t('show'), customer
-        %td.action.hide_on_print= link_to t('edit'), edit_customer_path(customer)
-        %td.action.hide_on_print= link_to t('destroy'), customer, :confirm => t('are_you_sure'), :method => :delete
+        %td.action.hide_on_print
+          = link_to t('show'), customer, :class => 'button'
+          = link_to t('edit'), edit_customer_path(customer), :class => 'button'
+          = link_to t('destroy'), customer, :confirm => t('are_you_sure'), :method => :delete, :class => 'button'
 
 .pagination= paginate @customers

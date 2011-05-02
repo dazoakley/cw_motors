@@ -1,5 +1,5 @@
 %h1= t('.title')
-%p.hide_on_print= link_to t('.new_invoice'), new_invoice_path
+%p.hide_on_print= link_to t('.new_invoice'), new_invoice_path, :class => 'button new_invoice'
 
 .pagination= paginate @invoices
 
@@ -14,7 +14,7 @@
       %th= 'MOT'
       %th= 'VAT'
       %th= 'Total'
-      %th.hide_on_print{:colspan => 3}= t 'actions'
+      %th.hide_on_print= t 'actions'
   
   %tbody
     - for invoice in @invoices
@@ -27,8 +27,9 @@
         %td= invoice.mot
         %td= invoice.vat
         %td= invoice.total
-        %td.action.hide_on_print= link_to t('show'), invoice
-        %td.action.hide_on_print= link_to t('edit'), edit_invoice_path(invoice)
-        %td.action.hide_on_print= link_to t('destroy'), invoice, :confirm => t('are_you_sure'), :method => :delete
+        %td.action.hide_on_print
+          = link_to t('show'), invoice, :class => 'button'
+          = link_to t('edit'), edit_invoice_path(invoice), :class => 'button'
+          = link_to t('destroy'), invoice, :confirm => t('are_you_sure'), :method => :delete, :class => 'button'
 
 .pagination= paginate @invoices
