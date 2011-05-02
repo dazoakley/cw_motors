@@ -24,7 +24,14 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   # GET /invoices/new.xml
   def new
-    @invoice = Invoice.new
+    @invoice = nil
+    
+    if params[:customer_id]
+      @invoice = Invoice.new( :customer_id => params[:customer_id] )
+    else
+      @invoice = Invoice.new
+    end
+    
     5.times { @invoice.invoice_labours.build }
     5.times { @invoice.invoice_parts.build }
 

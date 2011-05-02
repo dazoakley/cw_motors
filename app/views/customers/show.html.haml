@@ -1,33 +1,83 @@
 %h2= t '.title'
 %p
-  = link_to t('edit'), edit_customer_path(@customer)
+  = link_to t('edit'), edit_customer_path(@customer), :class => 'button edit_customer'
+  = link_to 'Create New Invoice', new_customer_invoice_path(@customer), :class => 'button new_invoice'
 
-%dl
-  %dt= CustomerTitle.human_attribute_name :title
-  %dd
-    - if @customer.customer_title
-      = @customer.customer_title.title
-  %dt= Customer.human_attribute_name :first_name
-  %dd= @customer.first_name
-  %dt= Customer.human_attribute_name :last_name
-  %dd= @customer.last_name
-  %dt= Customer.human_attribute_name :company
-  %dd= @customer.company
-  %dt= Customer.human_attribute_name :address_line1
-  %dd= @customer.address_line1
-  %dt= Customer.human_attribute_name :address_line2
-  %dd= @customer.address_line2
-  %dt= Customer.human_attribute_name :town
-  %dd= @customer.town
-  %dt= Customer.human_attribute_name :county
-  %dd= @customer.county
-  %dt= Customer.human_attribute_name :post_code
-  %dd= @customer.post_code
-  %dt= Customer.human_attribute_name :telephone
-  %dd= @customer.telephone
-  %dt= Customer.human_attribute_name :fax
-  %dd= @customer.fax
-  %dt= Customer.human_attribute_name :email
-  %dd= @customer.email
-  %dt= Customer.human_attribute_name :notes
-  %dd= @customer.notes
+%table.noborder
+  %tr
+    %td{ :width => '40%' }
+    
+      %table.padding
+        %tr
+          %th.strong.right Title
+          %td.left
+            - if @customer.customer_title
+              = @customer.customer_title.title
+        %tr
+          %th.strong.right Name
+          %td.left= "#{@customer.first_name} #{@customer.last_name}"
+        %tr
+          %th.strong.right Company
+          %td.left= @customer.company
+        %tr
+          %th.strong.right Address
+          %td.left
+            = @customer.address_line1
+            <br/>
+            = @customer.address_line2
+            = "<br/>" unless @customer.address_line2.blank?
+            = @customer.town
+            <br/>
+            = @customer.county
+            <br/>
+            = @customer.post_code
+        %tr
+          %th.strong.right Telephone
+          %td.left= @customer.telephone
+        %tr
+          %th.strong.right Fax
+          %td.left= @customer.fax
+        %tr
+          %th.strong.right Email
+          %td.left
+            - unless @customer.email.blank?
+              = mail_to(@customer.email)
+    
+    %td{ :width => '60%' }
+      
+      %table
+        %tr
+          %th.strong.left Notes
+        %tr
+          %td.left= @customer.notes
+
+%h4 Invoices
+- if @customer.invoices.size > 0
+  %table
+    %thead
+      %tr
+        %th= 'ID'
+        %th= 'Date'
+        %th= 'Make/Model'
+        %th= 'Reg. No.'
+        %th= 'MOT'
+        %th= 'VAT'
+        %th= 'Total'
+        %th.hide_on_print
+
+    %tbody
+      - for invoice in @customer.invoices
+        %tr{ :class => cycle(:odd, :even) }
+          %td= invoice.id
+          %td= invoice.date
+          %td= invoice.make_model
+          %td= invoice.registration
+          %td= invoice.mot
+          %td= invoice.vat
+          %td= invoice.total
+          %td.action.hide_on_print
+            = link_to 'Show', customer_invoice_path(invoice), :class => 'button'
+- else
+  %div
+    None found
+
