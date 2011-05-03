@@ -35,22 +35,22 @@
 
 %table.noborder.padding
   %tr
-    %th.right.strong{ :width => '20%' } Customer Name
+    %th.right.strong{ :width => '20%' } Name
     %td.left{ :width => '30%' }= "#{customer.first_name} #{customer.last_name}"
     %th.right.strong{ :width => '20%' } Date
     %td.left{ :width => '30%' }= @invoice.date
   %tr
-    %th.right.strong Customer Company
+    %th.right.strong Company
     %td.left= customer.company
     %th.right.strong Make / Model
     %td.left= @invoice.make_model
   %tr
-    %th.right.strong Customer Telephone
+    %th.right.strong Telephone
     %td.left= customer.telephone
     %th.right.strong Reg No.
     %td.left= @invoice.registration
   %tr
-    %th.right.strong{ :rowspan => 3 } Customer Address
+    %th.right.strong{ :rowspan => 3 } Address
     %td.left{ :rowspan => 2 }
       - address = [ customer.address_line1, customer.address_line2, customer.town, customer.county, customer.post_code ]
       - address.delete_if { |a| a.blank? }
@@ -107,10 +107,14 @@
             %th.right.strong Total Labour
             %td= @invoice.total_labour
           %tr
-            %td.left.smallprint{ :colspan => 2 }
-              I hereby authorise the above described work and the incorporation of necessary parts or other material incidental thereto.<br/><br/>
-              I agree to pay for the work, parts and materials necessary at your customary rates and charges on delivery, unless arrangements satisfactory to you for credit are made in advance.<br/><br/>
-              It is understood that you shall not be responsible for loss or damage to vehicles or contents in case of fire, theft, accident or other causes beyond your control.
+            %td{ :colspan => 2 }
+            
+              %table{ :style => 'border:none' }
+                %tr{ :style => 'border:none' }
+                  %td.left.smallprint{ :class => 'disclaimer' }
+                    I hereby authorise the above described work and the incorporation of necessary parts or other material incidental thereto.<br/><br/>
+                    I agree to pay for the work, parts and materials necessary at your customary rates and charges on delivery, unless arrangements satisfactory to you for credit are made in advance.<br/><br/>
+                    It is understood that you shall not be responsible for loss or damage to vehicles or contents in case of fire, theft, accident or other causes beyond your control.
       
     %td
       

@@ -9,24 +9,23 @@
 /* Body */
 
 body {
-	font: 10px/14px Arial, Helvetica, Geneva, sans-serif;
+	font: 10pt/1.1em Arial, Helvetica, Geneva, sans-serif;
 }
 
 /* Headings */
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: Georgia, "Times New Roman", Times, serif;
 	font-weight: bold;
 	margin-bottom: 5px;
 	line-height: 1em;
 }
 
-h1 { font-size: 34px; }
-h2 { font-size: 30px; }
-h3 { font-size: 26px; }
-h4 { font-size: 22px; }
-h5 { font-size: 18px; }
-h6 { font-size: 14px; }
+h1 { font-size: 34pt; }
+h2 { font-size: 30pt; }
+h3 { font-size: 26pt; }
+h4 { font-size: 22pt; }
+h5 { font-size: 18pt; }
+h6 { font-size: 14pt; }
 
 /* Layout */
 
@@ -58,12 +57,16 @@ p, table, ul, ol {
 }
 
 .strong {
-	font-family: Georgia, "Times New Roman", Times, serif;
 	font-weight: bold;
 }
 
 .smallprint {
-	font-size: smaller;
+	font-size: 8pt;
+	line-height: 8pt;
+}
+
+.disclaimer {
+	padding-top: 10px !important;
 }
 
 /* Tables */
@@ -78,14 +81,13 @@ table thead {
 }
 
 table thead th {
-	font-family: Georgia, "Times New Roman", Times, serif;
 	font-weight: bold;
 	text-transform: capitalize;
-	padding: 5px;
+	padding: 2px;
 }
 
 table td {
-	padding: 5px;
+	padding: 2px;
 	vertical-align: top;
 }
 
@@ -109,7 +111,7 @@ tr.nopadding, th.nopadding, td.nopadding {
 
 table.padding tr, table.padding th, table.padding td,
 tr.padding, th.padding, td.padding {
-	padding: 7px;
+	padding: 3px 5px;
 }
 
 table.border tr, tr.border {
