@@ -1,4 +1,6 @@
 class InvoicesController < ApplicationController
+  before_filter :set_no_of_pre_made_stuff, :only => [:new, :create]
+  
   # GET /invoices
   # GET /invoices.xml
   def index
@@ -32,8 +34,8 @@ class InvoicesController < ApplicationController
       @invoice = Invoice.new
     end
     
-    5.times { @invoice.invoice_labours.build }
-    5.times { @invoice.invoice_parts.build }
+    @no_of_pre_made_stuff.times { @invoice.invoice_labours.build }
+    @no_of_pre_made_stuff.times { @invoice.invoice_parts.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -56,19 +58,17 @@ class InvoicesController < ApplicationController
         format.html { redirect_to(@invoice, :notice => 'Invoice was successfully created.') }
         format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
       else
-        no_of_pre_made_stuff = 5
-        
         if @invoice.invoice_labours.empty?
-          no_of_pre_made_stuff.times { @invoice.invoice_labours.build }
+          @no_of_pre_made_stuff.times { @invoice.invoice_labours.build }
         else
-          no_times = no_of_pre_made_stuff - @invoice.invoice_labours.size
+          no_times = @no_of_pre_made_stuff - @invoice.invoice_labours.size
           no_times.times { @invoice.invoice_labours.build }
         end
         
         if @invoice.invoice_parts.empty?
-          no_of_pre_made_stuff.times { @invoice.invoice_parts.build }
+          @no_of_pre_made_stuff.times { @invoice.invoice_parts.build }
         else
-          no_times = no_of_pre_made_stuff - @invoice.invoice_parts.size
+          no_times = @no_of_pre_made_stuff - @invoice.invoice_parts.size
           no_times.times { @invoice.invoice_parts.build }
         end
         
@@ -104,5 +104,11 @@ class InvoicesController < ApplicationController
       format.html { redirect_to(invoices_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  private 
+  
+  def set_no_of_pre_made_stuff
+    @no_of_pre_made_stuff = 20
   end
 end
