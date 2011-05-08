@@ -1,4 +1,14 @@
 = semantic_form_for(@invoice) do |f|
+  - labour_errors = []
+  - part_errors   = []
+  - @invoice.errors.each do |attribute,errors_array|
+    - labour_errors.push(errors_array) unless attribute.to_s == 'invoice_labours.invoice_id' if attribute.to_s =~ /invoice_labours/
+    - part_errors.push(errors_array) unless attribute.to_s == 'invoice_parts.invoice_id' if attribute.to_s =~ /invoice_parts/
+  
+  - if @invoice.errors.any?
+    .errorExplanation
+      %h3 Errors were found when trying to create invoice
+      %p Please review the information in the form below and correct any errors.
 
   = f.inputs do
     = f.input :customer, :label_method => :short_code, :required => true
@@ -14,10 +24,14 @@
   %table{ :width => '100%' }
     %tr
       %td{ :width => '50%' }
-      
+        
         #labour
+          - unless labour_errors.empty?
+            .errorExplanation
+              %h3 Errors were found when trying to process these labour entries
+        
           %h6= 'Labour'
-          %table{ :width => '100%' }
+          %table.invoice_labours{ :width => '100%' }
             %thead
               %tr
                 %th{ :width => '75%' }
@@ -27,14 +41,18 @@
             %tbody
               = f.semantic_fields_for :invoice_labours do |l|
                 %tr
-                  %td= l.text_field :details, :size => 55
-                  %td= l.text_field :price, :size => 10
+                  %td.invoice_labours_details= l.input :details, :as => :string, :size => 55
+                  %td.invoice_labours_price= l.input :price, :size => 10
                   
       %td{ :width => '50%' }
-      
+        
         #parts
+          - unless part_errors.empty?
+            .errorExplanation
+              %h3 Errors were found when trying to process these part entries
+          
           %h6= 'Parts'
-          %table{ :width => '100%' }
+          %table.invoice_parts{ :width => '100%' }
             %thead
               %tr
                 %th{ :width => '75%' }
@@ -44,7 +62,7 @@
             %tbody
               = f.semantic_fields_for :invoice_parts do |l|
                 %tr
-                  %td= l.text_field :details, :size => 55
-                  %td= l.text_field :price, :size => 10
+                  %td.invoice_parts_details= l.input :details, :as => :string, :size => 55
+                  %td.invoice_parts_price= l.input :price, :size => 10
   
   = f.buttons
