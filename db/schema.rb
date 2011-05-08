@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110503203900) do
+ActiveRecord::Schema.define(:version => 20110508153634) do
 
   create_table "customer_titles", :force => true do |t|
     t.string   "title",      :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20110503203900) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "mobile"
   end
 
   add_index "customers", ["first_name", "last_name", "company"], :name => "index_customers_on_first_name_and_last_name_and_company", :unique => true

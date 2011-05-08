@@ -35,6 +35,9 @@
           %th.strong.right Telephone
           %td.left= @customer.telephone
         %tr
+          %th.strong.right Mobile
+          %td.left= @customer.mobile
+        %tr
           %th.strong.right Fax
           %td.left= @customer.fax
         %tr
@@ -76,7 +79,7 @@
           %td= invoice.vat
           %td= invoice.total
           %td.action.hide_on_print
-            = link_to 'Show', customer_invoice_path(invoice), :class => 'button'
+            = link_to 'Show', invoice_path(invoice), :class => 'button'
 - else
   %div
     None found
