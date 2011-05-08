@@ -25,24 +25,23 @@
     %tr
       %td{ :width => '50%' }
         
-        #labour
-          - unless labour_errors.empty?
-            .errorExplanation
-              %h3 Errors were found when trying to process these labour entries
-        
-          %h6= 'Labour'
-          %table.invoice_labours{ :width => '100%' }
-            %thead
-              %tr
-                %th{ :width => '75%' }
-                  Details
-                %th{ :width => '25%' }
-                  Price (&pound;)
-            %tbody
-              = f.semantic_fields_for :invoice_labours do |l|
-                %tr
-                  %td.invoice_labours_details= l.input :details, :as => :string, :size => 55
-                  %td.invoice_labours_price= l.input :price, :size => 10
+        - unless labour_errors.empty?
+          .errorExplanation
+            %h3 Errors were found when trying to process these labour entries
+      
+        %h6= 'Labour'
+        %table#invoice_labours{ :width => '100%' }
+          %thead
+            %tr
+              %th{ :width => '75%' }
+                Details
+              %th{ :width => '25%' }
+                Price (&pound;)
+              %th
+          %tbody
+            = f.semantic_fields_for :invoice_labours do |l|
+              = render :partial => 'invoice_labours_form', :locals => { :f => l }
+        = add_invoice_labours_link(f)
                   
       %td{ :width => '50%' }
         
@@ -52,17 +51,17 @@
               %h3 Errors were found when trying to process these part entries
           
           %h6= 'Parts'
-          %table.invoice_parts{ :width => '100%' }
+          %table#invoice_parts{ :width => '100%' }
             %thead
               %tr
                 %th{ :width => '75%' }
                   Details
                 %th{ :width => '25%' }
                   Price (&pound;)
+                %th
             %tbody
               = f.semantic_fields_for :invoice_parts do |l|
-                %tr
-                  %td.invoice_parts_details= l.input :details, :as => :string, :size => 55
-                  %td.invoice_parts_price= l.input :price, :size => 10
+                = render :partial => 'invoice_parts_form', :locals => { :f => l }
+          = add_invoice_parts_link(f)
   
   = f.buttons

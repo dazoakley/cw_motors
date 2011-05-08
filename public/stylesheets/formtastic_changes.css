@@ -91,19 +91,19 @@ form.formtastic fieldset > ol > li.error > input {
 
 /* Invoice Form Specifics */
 
-.invoice_labours ul, .invoice_parts ul {
+#invoice_labours ul, #invoice_parts ul {
 	list-style: none;
 }
 
-.invoice_labours li, .invoice_parts li {
+#invoice_labours li, #invoice_parts li {
 	list-style-type: none;
 }
 
-.invoice_labours label, .invoice_parts label {
+#invoice_labours label, #invoice_parts label {
 	display: none;
 }
 
-.invoice_labours .inline-errors, .invoice_parts .inline-errors {
+#invoice_labours .inline-errors, #invoice_parts .inline-errors {
 	font-style: italic;
 	font-size: smaller;
 	color: #cf0000;

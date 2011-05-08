@@ -1,0 +1,4 @@
+%tr.labour
+  %td.invoice_labours_details= f.input :details, :as => :string, :size => 55
+  %td.invoice_labours_price= f.input :price, :size => 10
+  %td=remove_invoice_labours_link(f)
