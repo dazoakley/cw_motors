@@ -59,7 +59,7 @@ class InvoicesControllerTest < ActionController::TestCase
     
     assert_redirected_to invoices_path
         
-    assert @invoice.paid  == false
-    assert @invoice2.paid == true
+    assert Invoice.find(@invoice.id).paid  == false
+    assert Invoice.find(@invoice2.id).paid == true
   end
 end
