@@ -159,6 +159,10 @@ table tbody tr.even {
 	color: #797979;
 }
 
+table tbody tr.unpaid {
+	color: #de2920;
+}
+
 table.noborder tr, table.noborder th, table.noborder td,
 tr.noborder, th.noborder, td.noborder {
 	border: none;

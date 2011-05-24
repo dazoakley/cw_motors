@@ -70,14 +70,16 @@
 
     %tbody
       - for invoice in @customer.invoices
-        %tr{ :class => cycle(:odd, :even) }
+        - row_class = 'unpaid'
+        - row_class = 'paid' if invoice.paid
+        %tr{ :class => row_class }
           %td= invoice.id
           %td= invoice.date
           %td= invoice.make_model
           %td= invoice.registration
-          %td= invoice.mot
-          %td= invoice.vat
-          %td= invoice.total
+          %td= sprintf("%.2f", invoice.mot)
+          %td= sprintf("%.2f", invoice.vat)
+          %td= sprintf("%.2f", invoice.total)
           %td.action.hide_on_print
             = link_to 'Show', invoice_path(invoice), :class => 'button'
 - else
