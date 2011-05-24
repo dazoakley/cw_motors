@@ -26,7 +26,7 @@
         %td= customer.address_line1
         %td= customer.town
         %td= customer.telephone
-        %td= customer.email
+        %td= mail_to(customer.email) unless customer.email.blank?
         %td.action.hide_on_print
           = link_to t('show'), customer, :class => 'button'
           = link_to t('edit'), edit_customer_path(customer), :class => 'button'
