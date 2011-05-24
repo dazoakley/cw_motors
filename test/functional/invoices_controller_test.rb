@@ -46,4 +46,20 @@ class InvoicesControllerTest < ActionController::TestCase
 
     assert_redirected_to invoices_path
   end
+  
+  test "should allow bulk update of payment status" do
+    @invoice2 = Factory.create(:invoice, { :paid => false })
+    
+    assert @invoice.paid  == true
+    assert @invoice2.paid == false
+    
+    request.env["HTTP_REFERER"] = invoices_path
+    
+    put :paid, :invoice_ids => { @invoice.to_param => false, @invoice2.to_param => true }
+    
+    assert_redirected_to invoices_path
+        
+    assert @invoice.paid  == false
+    assert @invoice2.paid == true
+  end
 end

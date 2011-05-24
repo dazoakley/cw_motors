@@ -1,12 +1,16 @@
 CwMotors::Application.routes.draw do
   get "welcome/index"
-
+  
+  resources :invoices do
+    collection do
+      put 'paid'
+    end
+  end
+  
   resources :customers do
     resources :invoices
   end
   
-  resources :invoices
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -106,6 +106,19 @@ class InvoicesController < ApplicationController
     end
   end
   
+  # PUT /invoices/paid
+  def paid
+    params[:invoice_ids].each do |invoice_id,paid_status|
+      invoice = Invoice.find( invoice_id )
+      if invoice.paid != paid_status
+        invoice.paid = paid_status
+        invoice.save
+      end
+    end
+    
+    redirect_to(:back)
+  end
+  
   private 
   
   def set_no_of_pre_made_stuff
