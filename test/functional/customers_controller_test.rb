@@ -11,6 +11,15 @@ class CustomersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:customers)
   end
 
+  test "should allow searching on the index page" do
+    Factory.create(:customer, :first_name => 'Joe', :last_name => 'Blogs')
+    get :index, :query => 'blo'
+    assert_response :success
+    assert_not_nil assigns(:customers)
+    assert_select 'td', 'Blogs'
+    assert !@response.body.include?('Doe')
+  end
+
   test "should get new" do
     get :new
     assert_response :success

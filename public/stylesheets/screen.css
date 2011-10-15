@@ -52,6 +52,13 @@ hr.pad {
 	margin-top: 10px;
 }
 
+/* Search Forms */
+
+.search {
+	float: right;
+	margin-top: 3px;
+}
+
 /* Navigation */
 
 #navigation {

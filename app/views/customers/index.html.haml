@@ -1,3 +1,9 @@
+.search
+  = form_tag('/customers', :method => :get) do
+    = label_tag 'query', 'Search:'
+    = text_field_tag 'query', params['query']
+    = submit_tag 'search'
+
 %h2= t('.title')
 %p= link_to t('.new_customer'), new_customer_path, :class => 'button new_customer'
 

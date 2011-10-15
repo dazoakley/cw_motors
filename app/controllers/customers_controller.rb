@@ -2,7 +2,16 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.xml
   def index
-    @customers = Customer.order("last_name ASC, first_name ASC, company ASC").page(params[:page])
+    @customers = Customer.order("last_name, first_name").page(params[:page])
+
+    if !params['query'].blank?
+      query = "%#{params['query']}%"
+      @customers =
+        Customer\
+          .where('first_name ILIKE ? OR last_name ILIKE ? OR company ILIKE ?', query, query, query)\
+          .order("last_name, first_name")\
+          .page(params[:page])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
