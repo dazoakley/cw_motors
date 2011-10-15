@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
+gem 'rails', '3.0.10'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -18,6 +18,7 @@ gem 'haml'
 gem 'foreigner'
 gem 'formtastic'
 gem 'kaminari'
+gem 'awesome_print'
 
 group :test do
   gem 'shoulda'
