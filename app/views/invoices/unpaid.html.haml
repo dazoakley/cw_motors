@@ -1,0 +1,7 @@
+.filter
+  = link_to 'Show All Invoices', invoices_path, :class => 'button invoice'
+
+%h1= 'Unpaid Invoices'
+
+= render 'invoice_list'
+

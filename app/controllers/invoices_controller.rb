@@ -12,6 +12,15 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def unpaid
+    @invoices = Invoice.where(:paid => false).order("id ASC").page(params[:page])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @invoices }
+    end
+  end
+
   # GET /invoices/1
   # GET /invoices/1.xml
   def show

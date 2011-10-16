@@ -3,6 +3,7 @@ CwMotors::Application.routes.draw do
   
   resources :invoices do
     collection do
+      get 'unpaid'
       put 'paid'
     end
   end

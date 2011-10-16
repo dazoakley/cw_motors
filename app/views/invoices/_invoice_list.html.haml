@@ -1,0 +1,45 @@
+%p.hide_on_print= link_to t('.new_invoice'), new_invoice_path, :class => 'button new_invoice'
+
+.pagination= paginate @invoices
+
+= form_tag paid_invoices_path, :method => :put do
+  %table.invoices.bulk_list
+    %thead
+      %tr
+        %th= 'ID'
+        %th= 'Customer'
+        %th= 'Date'
+        %th= 'Make/Model'
+        %th= 'Reg. No.'
+        %th= 'MOT'
+        %th= 'VAT'
+        %th= 'Total'
+        %th= 'Paid?'
+        %th.hide_on_print= t 'actions'
+
+    %tbody
+      - for invoice in @invoices
+        - row_class = 'unpaid'
+        - row_class = 'paid' if invoice.paid
+        %tr{ :class => row_class }
+          %td= invoice.id
+          %td= invoice.customer.short_code
+          %td= invoice.date
+          %td= invoice.make_model
+          %td= invoice.registration
+          %td= sprintf("%.2f", invoice.mot)
+          %td= sprintf("%.2f", invoice.vat)
+          %td= sprintf("%.2f", invoice.total)
+          %td
+            = radio_button_tag "invoice_ids[#{invoice.id}]", true, invoice.paid
+            y
+            = radio_button_tag "invoice_ids[#{invoice.id}]", false, !invoice.paid
+            n
+          %td.action.hide_on_print
+            = link_to t('show'), invoice, :class => 'button show_invoice'
+            = link_to t('edit'), edit_invoice_path(invoice), :class => 'button edit_invoice'
+            = link_to t('destroy'), invoice, :confirm => t('are_you_sure'), :method => :delete, :class => 'button delete_invoice'
+
+  = submit_tag "Update Payment Statuses", :confirm => "Are you sure you want to update the 'Paid?' status of these invoices?"
+
+.pagination= paginate @invoices

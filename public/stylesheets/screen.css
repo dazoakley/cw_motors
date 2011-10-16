@@ -1,7 +1,7 @@
 /* @override http://localhost:3000/stylesheets/screen.css */
 
 body {
-	font: 14px/18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font: 12px/14px "Lucida Grande", Lucida, Verdana, sans-serif;
 	color: #212121;
 }
 
@@ -14,12 +14,12 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1em;
 }
 
-h1 { font-size: 38px; }
-h2 { font-size: 34px; }
-h3 { font-size: 30px; }
-h4 { font-size: 26px; }
-h5 { font-size: 22px; }
-h6 { font-size: 18px; }
+h1 { font-size: 3em; }
+h2 { font-size: 2.4em; }
+h3 { font-size: 2em; }
+h4 { font-size: 1.6em; }
+h5 { font-size: 1.4em; }
+h6 { font-size: 1.2em; }
 
 /* Layout */
 
@@ -52,47 +52,64 @@ hr.pad {
 	margin-top: 10px;
 }
 
-/* Search Forms */
+/* Search/Filter */
 
-.search {
+.search, .filter {
 	float: right;
 	margin-top: 3px;
 }
 
+/* Links */
+
+a {
+	color: #57667b;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff7373;
+}
+
 /* Navigation */
 
-#navigation {
-	margin-top: 10px;
-	margin-bottom: 10px;
-	border-top: 1px solid #d5d5d5;
-	border-bottom: 1px solid #d5d5d5;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
 #navigation ul {
-	list-style: none;
-	margin-top: 7px;
-	margin-bottom: 7px;
+	margin: 10px 0px;
+	padding: 0px;
+	line-height: 29px;
+	white-space: nowrap;
+	border-radius: 4px;
+	background: #d1e0fe; /* Old browsers */
+	background: -moz-linear-gradient(top, #d1e0fe 15%, #a6c5ec 80%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(15%,#d1e0fe), color-stop(80%,#a6c5ec)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #d1e0fe 15%,#a6c5ec 80%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #d1e0fe 15%,#a6c5ec 80%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, #d1e0fe 15%,#a6c5ec 80%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1e0fe', endColorstr='#a6c5ec',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, #d1e0fe 15%,#a6c5ec 80%); /* W3C */
 }
 
-#navigation ul li {
+#navigation li {
 	list-style-type: none;
 	display: inline;
-	margin: 0 1px 0 1px;
+	border-left: 1px solid #c0c0c0;
 }
 
-#navigation ul li a {
-	padding: 5px 10px;
+#navigation li:first-child {
+	border: none;
+	margin-left: 10px;
+}
+
+#navigation li a {
+	font-weight: bold;
 	text-decoration: none;
-	color: #000;
-	background: #d5d5d5;
-	border-radius: 2px
+	padding: 7px 10px 7px 10px;
+	color: #333;
 }
 
-#navigation ul li a:hover {
-	color: #fff;
-	background: #000;
+#navigation li.current a,
+#navigation li a:hover {
+	font-weight: bold;
+	color: #8f110b;
 }
 
 /* Pagination */
@@ -110,14 +127,14 @@ hr.pad {
 .pagination span a {
 	padding: 3px;
 	border-radius: 2px;
-	color: #000;
-	text-decoration: none;
-	background: #d5d5d5;
+	background: #e7ecfb;
+	border: 1px solid #ccc;
 }
 
 .pagination span a:hover {
 	color: #fff;
-	background-color: #000;
+	background-color: #b0de78;
+	border: 1px solid #8fb55f;
 }
 
 /* Type */
@@ -154,8 +171,9 @@ table thead th {
 }
 
 table td {
-	padding: 5px;
 	vertical-align: top;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 table tbody tr {
@@ -197,22 +215,37 @@ th.right, td.right {
 	text-align: right;
 }
 
+table.bulk_list td {
+	vertical-align: middle;
+}
+
 /* Buttons */
 
-a.button {
-	background-color: #d5d5d5;
-	border-radius: 2px;
-	padding: 5px 10px;
-	text-decoration: none;
-	color: #000;
+.button {
+	padding: 4px 5px 4px 24px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background: #e7ecfb no-repeat 4px center;
 }
 
-a.button:hover {
+.button:hover {
 	color: #fff;
-	background-color: #000;
+	background-color: #b0de78;
+	border: 1px solid #8fb55f;
 }
 
-.new_user {
-	
-}
+.add { background-image: url(../images/silk-icons/add.png); }
+.remove { background-image: url(../images/silk-icons/delete.png); }
+.print { background-image: url(../images/silk-icons/printer.png); }
+
+.new_customer { background-image: url(../images/silk-icons/user_add.png); }
+.show_customer, .view_customers { background-image: url(../images/silk-icons/user_go.png); }
+.edit_customer { background-image: url(../images/silk-icons/user_edit.png); }
+.delete_customer { background-image: url(../images/silk-icons/user_delete.png); }
+
+.invoice { background-image: url(../images/silk-icons/page.png); }
+.new_invoice { background-image: url(../images/silk-icons/page_add.png); }
+.show_invoice { background-image: url(../images/silk-icons/page_go.png); }
+.edit_invoice { background-image: url(../images/silk-icons/page_edit.png); }
+.delete_invoice { background-image: url(../images/silk-icons/page_delete.png); }
 
