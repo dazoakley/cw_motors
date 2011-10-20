@@ -12,6 +12,7 @@ end
 platforms :jruby do
   gem 'activerecord-jdbc-adapter'
   gem 'jdbc-postgres', :require => false
+  gem 'warbler', :require => false
 end
 
 gem 'haml'
