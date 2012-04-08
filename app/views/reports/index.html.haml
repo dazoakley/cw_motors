@@ -1,5 +1,6 @@
 %h2= t('.title')
 
 .grid_12
-  %ul
-    %li= link_to 'All Customers', { :controller => 'reports', :action => 'customers', :format => 'csv' }, :class => 'button'
+  %p= link_to 'All Customers', { :controller => 'reports', :action => 'customers', :format => 'csv' }, :class => 'button'
+  %p= link_to 'All Invoices',  { :controller => 'reports', :action => 'invoices',  :format => 'csv' }, :class => 'button'
+
