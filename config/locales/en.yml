@@ -28,3 +28,6 @@ en:
       title: "Invoice Details"
     edit:
       title: "Edit Invoice"
+  reports:
+    index:
+      title: "Reports"

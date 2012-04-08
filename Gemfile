@@ -2,9 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.12'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 platforms :ruby do
   gem 'pg'
 end
@@ -19,10 +16,15 @@ gem 'haml'
 gem 'foreigner'
 gem 'formtastic'
 gem 'kaminari'
-gem 'awesome_print'
+gem 'ruport'
+gem 'acts_as_reportable'
 
 group :test do
   gem 'shoulda'
   gem 'factory_girl_rails'
+end
+
+group :development do
+  gem 'awesome_print'
 end
 

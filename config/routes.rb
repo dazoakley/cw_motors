@@ -1,17 +1,20 @@
 CwMotors::Application.routes.draw do
   get "welcome/index"
-  
+
   resources :invoices do
     collection do
       get 'unpaid'
       put 'paid'
     end
   end
-  
+
   resources :customers do
     resources :invoices
   end
-  
+
+  match 'reports' => "reports#index", :as => :reports
+  match 'reports/(:action(.:format))' => "reports#:action"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
