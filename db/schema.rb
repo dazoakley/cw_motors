@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110508153634) do
+ActiveRecord::Schema.define(:version => 20120408161606) do
 
   create_table "customer_titles", :force => true do |t|
     t.string   "title",      :null => false
@@ -37,7 +37,10 @@ ActiveRecord::Schema.define(:version => 20110508153634) do
     t.string   "mobile"
   end
 
+  add_index "customers", ["company"], :name => "index_customers_on_company"
   add_index "customers", ["first_name", "last_name", "company"], :name => "index_customers_on_first_name_and_last_name_and_company", :unique => true
+  add_index "customers", ["first_name"], :name => "index_customers_on_first_name"
+  add_index "customers", ["last_name"], :name => "index_customers_on_last_name"
 
   create_table "invoice_labours", :force => true do |t|
     t.integer  "invoice_id", :limit => 10
@@ -73,6 +76,9 @@ ActiveRecord::Schema.define(:version => 20110508153634) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "invoices", ["make_model"], :name => "index_invoices_on_make_model"
+  add_index "invoices", ["registration"], :name => "index_invoices_on_registration"
 
   add_foreign_key "customers", "customer_titles", :name => "customers_customer_title_id_fk"
 
