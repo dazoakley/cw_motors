@@ -5,6 +5,10 @@ body {
 	color: #212121;
 }
 
+#content {
+  margin-bottom: 20px;
+}
+
 /* Headings */
 
 h1, h2, h3, h4, h5, h6 {
@@ -174,6 +178,8 @@ table td {
 	vertical-align: top;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	padding-left: 2px;
+	padding-right: 2px;
 }
 
 table tbody tr {
@@ -237,6 +243,7 @@ table.bulk_list td {
 .add { background-image: url(../images/silk-icons/add.png); }
 .remove { background-image: url(../images/silk-icons/delete.png); }
 .print { background-image: url(../images/silk-icons/printer.png); }
+.back { background-image: url(../images/silk-icons/arrow_undo.png); }
 
 .new_customer { background-image: url(../images/silk-icons/user_add.png); }
 .show_customer, .view_customers { background-image: url(../images/silk-icons/user_go.png); }
@@ -249,3 +256,6 @@ table.bulk_list td {
 .edit_invoice { background-image: url(../images/silk-icons/page_edit.png); }
 .delete_invoice { background-image: url(../images/silk-icons/page_delete.png); }
 
+form.invoice {
+  background-image: none;
+}
