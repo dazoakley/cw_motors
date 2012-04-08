@@ -1,6 +1,0 @@
-if [[ -n "$rvm_environments_path" && -s "$rvm_environments_path/jruby-1.6.4@cw_motors" ]] ; then
-  \. "$rvm_environments_path/jruby-1.6.4@cw_motors"
-else
-  rvm --create use  "jruby-1.6.4@cw_motors"
-fi
-
