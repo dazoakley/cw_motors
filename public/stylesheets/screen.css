@@ -56,9 +56,9 @@ hr.pad {
 	margin-top: 10px;
 }
 
-/* Search/Filter */
+/* Filter Controls */
 
-.search, .filter {
+.filter {
 	float: right;
 	margin-top: 3px;
 }
@@ -114,6 +114,12 @@ a:hover {
 #navigation li a:hover {
 	font-weight: bold;
 	color: #8f110b;
+}
+
+#navigation #search {
+  float: right;
+  margin-top: 3px;
+  margin-right: 10px;
 }
 
 /* Pagination */

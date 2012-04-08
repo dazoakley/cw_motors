@@ -1,30 +1,32 @@
+%h2= 'Search Results'
+
+.clear{ :style => 'padding:5px;' }
+
 %h3= 'Customers'
 
-%p
-  These customers were found using the customers first name, last name or company name...
-
 - if @customers.size > 0
+  %p= 'These customers were found using the customers first name, last name or company name...'
   = render :partial => 'customers', :locals => { :customers => @customers }
+
+  .clear{ :style => 'padding:10px;' }
+
+  %h3= 'Invoices for Matched Customers'
+
+  - if @invoices_for_customers.size > 0
+    %p= 'These are the invoices belonging to the above customers...'
+    = render :partial => 'invoices', :locals => { :invoices => @invoices_for_customers }
+  - else
+    %p= 'No invoices found for the above customers'
 - else
   %p= 'No customer records found'
 
-%h3= 'Invoices for Matched Customers'
-
-%p
-  These are the invoices belonging to the above customers...
-
-- if @invoices_for_customers.size > 0
-  = render :partial => 'invoices', :locals => { :invoices => @invoices_for_customers }
-- else
-  %p= 'No invoices found for the above customers'
+.clear{ :style => 'padding:10px;' }
 
 %h3= 'Invoices'
 
-%p
-  These invoices were found using the car's make/model or registration number...
-
 - if @invoices.size > 0
+  %p= "These invoices were found using the car's make/model or registration number..."
   = render :partial => 'invoices', :locals => { :invoices => @invoices }
 - else
-  %p= 'No other invoices found'
+  %p= 'No invoices found'
 
