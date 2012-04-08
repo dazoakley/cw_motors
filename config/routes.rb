@@ -12,8 +12,10 @@ CwMotors::Application.routes.draw do
     resources :invoices
   end
 
-  match 'reports' => "reports#index", :as => :reports
-  match 'reports/(:action(.:format))' => "reports#:action"
+  match 'reports' => 'reports#index', :as => :reports
+  match 'reports/(:action(.:format))' => 'reports#:action'
+
+  match 'search' => 'search#index', :as => :search
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

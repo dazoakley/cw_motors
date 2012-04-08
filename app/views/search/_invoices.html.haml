@@ -1,0 +1,28 @@
+%table.invoices.bulk_list
+  %thead
+    %tr
+      %th= 'ID'
+      %th= 'Customer'
+      %th= 'Date'
+      %th= 'Make/Model'
+      %th= 'Reg. No.'
+      %th= 'MOT'
+      %th= 'VAT'
+      %th= 'Total'
+      %th= 'Paid?'
+      %th.hide_on_print= t 'actions'
+
+  %tbody
+    - for invoice in invoices
+      %tr{ :class => cycle(:odd, :even) }
+        %td= invoice.id
+        %td= invoice.customer.short_code
+        %td= invoice.date
+        %td= invoice.make_model
+        %td= invoice.registration
+        %td= sprintf("%.2f", invoice.mot)
+        %td= sprintf("%.2f", invoice.vat)
+        %td= sprintf("%.2f", invoice.total)
+        %td= invoice.paid ? 'Y' : 'N'
+        %td.action.hide_on_print
+          = link_to t('show'), invoice, :class => 'button show_invoice'

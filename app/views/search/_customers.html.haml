@@ -1,0 +1,22 @@
+%table.customers.bulk_list
+  %thead
+    %tr
+      %th
+      %th= Customer.human_attribute_name :first_name
+      %th= Customer.human_attribute_name :last_name
+      %th= Customer.human_attribute_name :company
+      %th= Customer.human_attribute_name :telephone
+      %th= Customer.human_attribute_name :email
+      %th.hide_on_print= t 'actions'
+
+  %tbody
+    - for customer in customers
+      %tr{ :class => cycle(:odd, :even) }
+        %td= link_to 'New Invoice', new_customer_invoice_path(customer), :class => 'button new_invoice'
+        %td= customer.first_name
+        %td= customer.last_name
+        %td= customer.town
+        %td= customer.telephone
+        %td= mail_to(customer.email) unless customer.email.blank?
+        %td.action.hide_on_print
+          = link_to t('show'), customer, :class => 'button show_customer'
