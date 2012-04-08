@@ -49,7 +49,8 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.xml
   def create
-    @customer = Customer.new(params[:customer])
+    customer_params = cleanup_attrs(params[:customer])
+    @customer = Customer.new(customer_params)
 
     respond_to do |format|
       if @customer.save
@@ -68,7 +69,8 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
 
     respond_to do |format|
-      if @customer.update_attributes(params[:customer])
+      customer_params = cleanup_attrs(params[:customer])
+      if @customer.update_attributes(customer_params)
         format.html { redirect_to(@customer, :notice => 'Customer was successfully updated.') }
         format.xml  { head :ok }
       else

@@ -33,6 +33,14 @@ class CustomersControllerTest < ActionController::TestCase
     assert_redirected_to customer_path(assigns(:customer))
   end
 
+  test "should clean up badly formatted params" do
+    post :create, :customer => Factory.attributes_for(:customer, :first_name => ' Bob', :last_name => 'Flemming  ')
+
+    customer = Customer.last
+    assert_equal 'Bob', customer.first_name
+    assert_equal 'Flemming', customer.last_name
+  end
+
   test "should show customer" do
     get :show, :id => @customer.to_param
     assert_response :success

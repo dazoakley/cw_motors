@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
   before_filter :set_no_of_pre_made_stuff, :only => [:new, :create]
-  
+
   # GET /invoices
   # GET /invoices.xml
   def index
@@ -36,13 +36,13 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.xml
   def new
     @invoice = nil
-    
+
     if params[:customer_id]
       @invoice = Invoice.new( :customer_id => params[:customer_id] )
     else
       @invoice = Invoice.new
     end
-    
+
     @no_of_pre_made_stuff.times { @invoice.invoice_labours.build }
     @no_of_pre_made_stuff.times { @invoice.invoice_parts.build }
 
@@ -60,7 +60,8 @@ class InvoicesController < ApplicationController
   # POST /invoices
   # POST /invoices.xml
   def create
-    @invoice = Invoice.new(params[:invoice])
+    invoice_params = cleanup_attrs(params[:invoice])
+    @invoice = Invoice.new(invoice_params)
 
     respond_to do |format|
       if @invoice.save
@@ -73,14 +74,14 @@ class InvoicesController < ApplicationController
           no_times = @no_of_pre_made_stuff - @invoice.invoice_labours.size
           no_times.times { @invoice.invoice_labours.build }
         end
-        
+
         if @invoice.invoice_parts.empty?
           @no_of_pre_made_stuff.times { @invoice.invoice_parts.build }
         else
           no_times = @no_of_pre_made_stuff - @invoice.invoice_parts.size
           no_times.times { @invoice.invoice_parts.build }
         end
-        
+
         format.html { render :action => "new" }
         format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
       end
@@ -93,7 +94,8 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
 
     respond_to do |format|
-      if @invoice.update_attributes(params[:invoice])
+      invoice_params = cleanup_attrs(params[:invoice])
+      if @invoice.update_attributes(invoice_params)
         format.html { redirect_to(@invoice, :notice => 'Invoice was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -114,7 +116,7 @@ class InvoicesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   # PUT /invoices/paid
   def paid
     params[:invoice_ids].each do |invoice_id,paid_status|
@@ -124,12 +126,12 @@ class InvoicesController < ApplicationController
         invoice.save
       end
     end
-    
+
     redirect_to(:back)
   end
-  
-  private 
-  
+
+  private
+
   def set_no_of_pre_made_stuff
     @no_of_pre_made_stuff = 20
   end
