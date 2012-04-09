@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  include Config
+
   def index
   end
 
@@ -27,7 +29,7 @@ class WelcomeController < ApplicationController
 
     backup_conf = YAML.load_file(backup_conf)
 
-    if RUBY_PLATFORM.downcase.include?("mswin")
+    if CONFIG['host_os'].downcase.include?("mswin")
       winscp_command = [
         'winscp.exe',
         '/console',
@@ -62,16 +64,10 @@ class WelcomeController < ApplicationController
     Rails.logger.info("\n\n")
     Rails.logger.info("Running database dump into #{backup_file} ...")
 
-    pg_dump_cmd = []
-
-    if RUBY_PLATFORM.downcase.include?("mswin")
-      pg_dump_cmd << 'pg_dump'
-    else
-      pg_dump_cmd << 'pg_dump'
-    end
-
     db_conf = CwMotors::Application.config.database_configuration[Rails.env]
 
+    pg_dump_cmd = []
+    pg_dump_cmd << 'pg_dump'
     pg_dump_cmd << "--host #{db_conf['host'] ? db_conf['host'] : 'localhost'}"
     pg_dump_cmd << "--port #{db_conf['port'] ? db_conf['port'] : '5432'}"
     pg_dump_cmd << "--username #{db_conf['username']}"

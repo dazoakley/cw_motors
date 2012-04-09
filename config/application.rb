@@ -46,3 +46,4 @@ module CwMotors
 end
 
 require 'date'
+require 'rbconfig'
