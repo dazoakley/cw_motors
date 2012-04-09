@@ -1,5 +1,6 @@
 CwMotors::Application.routes.draw do
   get "welcome/index"
+  match 'backup' => 'welcome#backup', :as => :backup
 
   resources :invoices do
     collection do
