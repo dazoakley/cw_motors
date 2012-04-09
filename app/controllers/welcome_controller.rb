@@ -6,22 +6,51 @@ class WelcomeController < ApplicationController
     filename       = "cw_motors-#{Date.today.to_s}.sql"
     db_backup_path = "#{Rails.root}"
     backup_conf    = "#{Rails.root}"
+    script_path    = "#{Rails.root}"
 
     if RUBY_PLATFORM.downcase.include?("mswin")
       db_backup_path << "\\backup\\#{filename}"
       backup_conf << "\\config\\backup.yml"
+      script_path << "\\backup\\script.txt"
     else
       db_backup_path << "/backup/#{filename}"
       backup_conf << "/config/backup.yml"
+      script_path << "/backup/script.txt"
     end
 
     # Dump the database...
     dump_database(db_backup_path)
 
-    # Upload to server...
+    ##
+    ## Upload to server...
+    ##
+
     backup_conf = YAML.load_file(backup_conf)
-    Net::SFTP.start(backup_conf['host'],backup_conf['username'],:password => backup_conf['password']) do |sftp|
-      sftp.upload!(db_backup_path, "/srv/cw_motors_backups/#{filename}")
+
+    if RUBY_PLATFORM.downcase.include?("mswin")
+      winscp_command = [
+        'winscp.exe',
+        '/console',
+        '/command',
+        '"option batch abort"',
+        "\"open sftp://#{backup_conf['username']}:#{backup_conf['password']}@#{backup_conf['host']}:/srv/cw_motors_backups/\"",
+        '"option transfer binary"',
+        "\"put #{db_backup_path}\"",
+        '"close"',
+        '"exit"'
+      ]
+
+      winscp_command = winscp_command.join(' ')
+      `#{winscp_command}`
+    else
+      scp_command = [
+        'scp',
+        db_backup_path,
+        "#{backup_conf['username']}@#{backup_conf['host']}:/srv/cw_motors_backups/#{filename}"
+      ]
+
+      scp_command = scp_command.join(' ')
+      `#{scp_command}`
     end
 
     redirect_to root_path
