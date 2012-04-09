@@ -8,6 +8,10 @@ class WelcomeController < ApplicationController
     filename       = "cw_motors-#{Date.today.to_s}.sql"
     db_backup_path = "#{Rails.root}"
     backup_conf    = "#{Rails.root}"
+	
+	Dir.chdir(Rails.root) do |dir|
+	  Dir.mkdir('backup') unless File.exists?('backup')
+	end
 
     if CONFIG['host_os'].downcase.include?("mswin")
       db_backup_path << "\\backup\\#{filename}"
@@ -26,9 +30,12 @@ class WelcomeController < ApplicationController
 
     backup_conf = YAML.load_file(backup_conf)
 
+	Rails.logger.info("\n\n")
+    Rails.logger.info("Sending database dump to server ...")
+	
     if CONFIG['host_os'].downcase.include?("mswin")
       winscp_command = [
-        'winscp.exe',
+        '"C:/Program Files (x86)/WinSCP/WinSCP.exe"'.gsub('/','\\'),
         '/console',
         '/command',
         '"option batch abort"',
@@ -39,7 +46,11 @@ class WelcomeController < ApplicationController
       ]
 
       winscp_command = winscp_command.join(' ')
-      `#{winscp_command}`
+	  
+	  Rails.logger.info('WinSCP command:')
+	  Rails.logger.info(winscp_command)
+      
+	  `#{winscp_command}`
     else
       scp_command = [
         'scp',
@@ -50,6 +61,9 @@ class WelcomeController < ApplicationController
       scp_command = scp_command.join(' ')
       `#{scp_command}`
     end
+	
+	Rails.logger.info('Database dump sent.')
+	Rails.logger.info("\n\n")
 
     redirect_to root_path
   end
