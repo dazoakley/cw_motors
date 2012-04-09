@@ -9,14 +9,14 @@ class WelcomeController < ApplicationController
     db_backup_path = "#{Rails.root}"
     backup_conf    = "#{Rails.root}"
 
-	if CONFIG['host_os'].downcase.include?("mswin")
-	  db_backup_path << "\\backup\\#{filename}"
-	  backup_conf << "\\config\\backup.yml"
-	else
-	  db_backup_path << "/backup/#{filename}"
-	  backup_conf << "/config/backup.yml"
-	end
-	
+    if CONFIG['host_os'].downcase.include?("mswin")
+      db_backup_path << "\\backup\\#{filename}"
+      backup_conf << "\\config\\backup.yml"
+    else
+      db_backup_path << "/backup/#{filename}"
+      backup_conf << "/config/backup.yml"
+    end
+
     # Dump the database...
     dump_database(db_backup_path)
 
@@ -39,7 +39,6 @@ class WelcomeController < ApplicationController
       ]
 
       winscp_command = winscp_command.join(' ')
-	  puts winscp_command
       `#{winscp_command}`
     else
       scp_command = [
@@ -63,16 +62,16 @@ class WelcomeController < ApplicationController
 
     db_conf = CwMotors::Application.config.database_configuration[Rails.env]
 
-	ENV['PGPASSWORD'] = db_conf['password'] if ENV['PGPASSWORD'].nil?
-	
+    ENV['PGPASSWORD'] = db_conf['password'] if ENV['PGPASSWORD'].nil?
+
     pg_dump_cmd = []
-	
-	if CONFIG['host_os'].downcase.include?("mswin")
-		pg_dump_cmd << 'C:/Program Files/PostgreSQL/9.0/bin/pg_dump.exe'
-	else
-		pg_dump_cmd << 'pg_dump'
-	end
-	
+
+    if CONFIG['host_os'].downcase.include?("mswin")
+      pg_dump_cmd << 'C:/Program Files/PostgreSQL/9.0/bin/pg_dump.exe'
+    else
+      pg_dump_cmd << 'pg_dump'
+    end
+
     pg_dump_cmd << "--host #{db_conf['host'] ? db_conf['host'] : 'localhost'}"
     pg_dump_cmd << "--port #{db_conf['port'] ? db_conf['port'] : '5432'}"
     pg_dump_cmd << "--username #{db_conf['username']}"
