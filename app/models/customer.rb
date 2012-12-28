@@ -1,6 +1,4 @@
 class Customer < ActiveRecord::Base
-  acts_as_reportable
-
   belongs_to :customer_title
   has_many :invoices
 
