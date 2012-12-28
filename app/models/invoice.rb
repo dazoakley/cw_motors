@@ -1,6 +1,4 @@
 class Invoice < ActiveRecord::Base
-  acts_as_reportable
-
   belongs_to :customer
 
   has_many :invoice_labours, :dependent => :destroy

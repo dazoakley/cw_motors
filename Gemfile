@@ -17,8 +17,6 @@ gem 'haml'
 gem 'foreigner'
 gem 'formtastic'
 gem 'kaminari'
-gem 'ruport'
-gem 'acts_as_reportable'
 
 group :test do
   gem 'shoulda'
