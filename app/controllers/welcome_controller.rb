@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  include Config
+  include RbConfig
 
   def index
   end
@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
     filename       = "cw_motors-#{Date.today.to_s}.sql"
     db_backup_path = "#{Rails.root}"
     backup_conf    = "#{Rails.root}"
-	
+
 	Dir.chdir(Rails.root) do |dir|
 	  Dir.mkdir('backup') unless File.exists?('backup')
 	end
@@ -32,7 +32,7 @@ class WelcomeController < ApplicationController
 
 	Rails.logger.info("\n\n")
     Rails.logger.info("Sending database dump to server ...")
-	
+
     if CONFIG['host_os'].downcase.include?("mswin")
       winscp_command = [
         '"C:/Program Files (x86)/WinSCP/WinSCP.exe"'.gsub('/','\\'),
@@ -46,10 +46,10 @@ class WelcomeController < ApplicationController
       ]
 
       winscp_command = winscp_command.join(' ')
-	  
+
 	  Rails.logger.info('WinSCP command:')
 	  Rails.logger.info(winscp_command)
-      
+
 	  `#{winscp_command}`
     else
       scp_command = [
@@ -61,7 +61,7 @@ class WelcomeController < ApplicationController
       scp_command = scp_command.join(' ')
       `#{scp_command}`
     end
-	
+
 	Rails.logger.info('Database dump sent.')
 	Rails.logger.info("\n\n")
 
