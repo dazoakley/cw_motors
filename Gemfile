@@ -21,6 +21,7 @@ gem 'kaminari'
 group :test do
   gem 'shoulda'
   gem 'factory_girl_rails'
+  gem 'simplecov'
 end
 
 group :development do
