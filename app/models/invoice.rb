@@ -1,8 +1,8 @@
 class Invoice < ActiveRecord::Base
   belongs_to :customer
 
-  has_many :invoice_labours, :dependent => :destroy
-  has_many :invoice_parts, :dependent => :destroy
+  has_many :invoice_labours, :order => "invoice_labours.created_at asc", :dependent => :destroy
+  has_many :invoice_parts, :order => "invoice_parts.created_at asc", :dependent => :destroy
 
   accepts_nested_attributes_for :invoice_labours, :allow_destroy => true, :reject_if => Proc.new { |il| il[:price].blank? }
   accepts_nested_attributes_for :invoice_parts,   :allow_destroy => true, :reject_if => Proc.new { |ip| ip[:price].blank? }
